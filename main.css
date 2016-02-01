@@ -1,0 +1,13 @@
+#clock {
+	width: 280px;
+	height: 280px;
+	background-color: #f00;
+	margin: 0 auto;
+	border-radius: 50%;
+	margin-top: 180px;
+}
+#time{
+	padding-top: 120px;
+	text-align: center;
+	font-size: 32px;
+}
