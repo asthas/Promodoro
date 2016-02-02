@@ -1,28 +1,47 @@
-function updateTime(){
-	var circle = document.getElementById("time");
-	var d = new Date();
-	var h = (d.getHours() < 10?'0'+d.getHours():d.getHours());
-	var m = (d.getMinutes() < 10?'0'+d.getMinutes():d.getMinutes());
-	var s = (d.getSeconds() < 10?'0'+d.getSeconds():d.getSeconds());
-	var date = h+':' + m + ':' + s;
-	circle.innerHTML = date;
+
+function updateTime(timer, display){
+	console.log(timer)
+	var h, m, s, time, duration;
+	duration = timer;
+	if(timer > 0){
+		window.started = setInterval(function(){
+			m = parseInt(timer/60, 10);
+			s = parseInt(timer%60, 10);
+			m = m<10?'0'+m:m;
+			s = s<10?'0'+s:s;
+			time = m+":"+s; 
+			console.log(time);
+			display.textContent =time;
+			if(--timer < 0){
+				timer = duration;
+			}
+		}, 1000);
+	}
 }
 
-setInterval(updateTime, 1000);
+function setTimer(counter){
+	$("p").html(counter);
+	stopTimer();
+	var timer = counter*60;
+	console.log(counter);
+	var display = document.querySelector('#time');
+	updateTime(timer, display);
+}
+
+function stopTimer(){
+	clearInterval(window.started);
+}
 
 $(document).ready(function(){
 	var counter = 0;
 	$("#plus").click(function(){
 		counter++;
-		$("p").html(counter);
+
+		setTimer(counter);
 	});
 	$("#minus").click(function(){
-		if(counter > 0){
-			counter--;
-		}
-		
-		$("p").html(counter);
+		counter = counter > 0 ? counter - 1  : counter;
+		setTimer(counter);
 	});
-	
 });
 
