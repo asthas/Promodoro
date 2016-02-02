@@ -1,4 +1,4 @@
-
+var snd = new Audio("sound/sound.wav");
 function updateTime(timer, display){
 	console.log(timer)
 	var h, m, s, time, duration;
@@ -13,7 +13,9 @@ function updateTime(timer, display){
 			console.log(time);
 			display.textContent =time;
 			if(--timer < 0){
-				timer = duration;
+				display.textContent = "Time up!"
+				snd.play();
+				stopTimer();
 			}
 		}, 1000);
 	}
@@ -36,7 +38,6 @@ $(document).ready(function(){
 	var counter = 0;
 	$("#plus").click(function(){
 		counter++;
-
 		setTimer(counter);
 	});
 	$("#minus").click(function(){
